@@ -1,5 +1,6 @@
 import requests
 import json
+import uuid
 from jsonrpc_python_client_generator.response import Success, Error
 from typing import Union
 
@@ -20,7 +21,8 @@ class HttpClient:
         data = {
             'jsonrpc':'2.0',
             'method':method,
-            'params':params
+            'params':params,
+            'id':'python-client-'+str(uuid.uuid4())
             }
         response = requests.post(self.url, json=data, headers=self.headers)
         result = json.loads(response.text)
